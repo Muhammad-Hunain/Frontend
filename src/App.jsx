@@ -11,15 +11,20 @@ import {
 } from "@mui/material";
 import "./index.css"; // Import custom CSS file for additional styling
 import axios from "axios";
-function ContactForm() {
-  const [formData, setFormData] = useState({
-    name: "",
+
+
+
+const initialFormData = {
+  name: "",
     email: "",
     phone: "",
     message: "",
     services: "",
     description:""
-  });
+};
+
+function ContactForm() {
+  const [formData, setFormData] = useState(initialFormData);
 
   const [formErrors, setFormErrors] = useState({
     name: "",
@@ -64,9 +69,11 @@ function ContactForm() {
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
           }
+          
         });
         if (response.status === 201) {
           console.log('Data submitted successfully');
+          setFormData(initialFormData);
           // Handle success case if needed
         } else {
           console.log('Error submitting data');
